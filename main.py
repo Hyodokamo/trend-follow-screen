@@ -113,12 +113,14 @@ def main():
             liq_ok.loc[t] = True
 
     # 月末終値（カレンダー月末で最後の取引日）
-    close_m = close_d.resample("M").last()
+    close_m = close_d.resample("ME").last()
 
     # 当月途中は落とす（未確定月を混ぜない）
-    if close_m.index[-1].to_period("M") == pd.Timestamp.now(tz="UTC").to_period("M"):
+    last_month_start = close_m.index[-1].to_period("M").to_timestamp()
+    this_month_start = pd.Timestamp.utcnow().to_period("M").to_timestamp()
+    if last_month_start == this_month_start:
         close_m = close_m.iloc[:-1]
-
+    
     if len(close_m) < (max(MA_MONTHS, MOM_MONTHS) + 2):
         raise ValueError("not enough monthly history for MA/Momentum")
 
