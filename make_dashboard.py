@@ -5,6 +5,8 @@ from datetime import datetime, timezone
 import re
 import pandas as pd
 
+DASHBOARD_VERSION = "v2-2026-01-18"
+
 OUT_DIR = Path("out")
 DOCS_DIR = Path("docs")
 HIST_SRC = OUT_DIR / "history"
@@ -35,10 +37,6 @@ def latest_history_files(pattern: str, k: int = 12) -> list[Path]:
 def copy_history_to_docs():
     """
     docs/history に直近12回ぶんをコピー
-    - picks_*.csv
-    - orders_*.csv
-    - screen_all_*.csv
-    - meta_*.csv
     """
     patterns = ["picks_*.csv", "orders_*.csv", "screen_all_*.csv", "meta_*.csv"]
     for pat in patterns:
@@ -47,9 +45,6 @@ def copy_history_to_docs():
 
 
 def build_history_links(prefix: str, title: str) -> str:
-    """
-    docs/history から prefix_*.csv のリンク一覧を作る
-    """
     files = sorted(HIST_DST.glob(f"{prefix}_*.csv"), reverse=True)
     if not files:
         return f"<p>({title}: 履歴なし)</p>"
@@ -66,8 +61,7 @@ def extract_date_from_name(stem: str, prefix: str) -> str:
 
 def load_latest_and_prev_from_history(prefix: str) -> tuple[pd.DataFrame, pd.DataFrame, str, str]:
     """
-    out/history/{prefix}_YYYY-MM-DD.csv から
-    最新（今月）と1つ前（先月）を読み込む。
+    out/history/{prefix}_YYYY-MM-DD.csv から 最新と1つ前を読む
     """
     if not HIST_SRC.exists():
         return pd.DataFrame(), pd.DataFrame(), "(none)", "(none)"
@@ -97,9 +91,6 @@ def load_latest_and_prev_from_history(prefix: str) -> tuple[pd.DataFrame, pd.Dat
 
 
 def diff_picks(cur: pd.DataFrame, prev: pd.DataFrame) -> pd.DataFrame:
-    """
-    Tickerベースで KEEP/ADD/DROP を作る。
-    """
     if cur is None or cur.empty or "Ticker" not in cur.columns:
         return pd.DataFrame(columns=["Ticker", "action"])
     if prev is None or prev.empty or "Ticker" not in prev.columns:
@@ -129,9 +120,6 @@ def diff_picks(cur: pd.DataFrame, prev: pd.DataFrame) -> pd.DataFrame:
 
 
 def highlight_action_table(df: pd.DataFrame) -> str:
-    """
-    action列を軽くハイライト（目視ミス防止）
-    """
     if df is None or df.empty:
         return "<p>(比較対象が不足しています)</p>"
 
@@ -148,40 +136,32 @@ def highlight_action_table(df: pd.DataFrame) -> str:
     return df.style.apply(style_row, axis=1).hide(axis="index").to_html()
 
 
-def build_html(
-    meta: pd.DataFrame,
-    picks: pd.DataFrame,
-    ranking: pd.DataFrame,
-    orders: pd.DataFrame,
-    screen_all: pd.DataFrame,
-) -> str:
+def build_html(meta: pd.DataFrame, picks: pd.DataFrame, ranking: pd.DataFrame,
+               orders: pd.DataFrame, screen_all: pd.DataFrame) -> str:
     asof = meta.loc[0, "asof_month_end"] if len(meta) else ""
     gen = meta.loc[0, "generated_at_utc"] if len(meta) else ""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
-    # history links
+    # 履歴リンク
     hist_picks = build_history_links("picks", "Picks（直近12回）")
     hist_orders = build_history_links("orders", "Orders（直近12回）")
     hist_screen = build_history_links("screen_all", "Screen All（直近12回）")
 
-    # 今月/先月 picks（historyベース）
+    # 今月/先月 picks（historyから）
     cur_picks_h, prev_picks_h, cur_asof, prev_asof = load_latest_and_prev_from_history("picks")
     diff = diff_picks(cur_picks_h, prev_picks_h)
     diff_html = highlight_action_table(diff)
 
-    # 表示用HTML
+    # 表
     picks_table = picks.to_html(index=False) if len(picks) else "<p>(picks.csv がありません)</p>"
     ranking_table = ranking.to_html(index=False) if len(ranking) else "<p>(ranking.csv がありません)</p>"
     meta_table = meta.to_html(index=False) if len(meta) else "<p>(meta.csv がありません)</p>"
 
-    # orders（空なら“変更なし”を明示）
     orders_table = orders.to_html(index=False) if len(orders) else "<p>(注文なし＝先月から変更なし)</p>"
 
-    # 今月 vs 先月 picks（横並び）
     cur_html = cur_picks_h.to_html(index=False) if len(cur_picks_h) else "<p>(今月picks履歴がありません)</p>"
     prev_html = prev_picks_h.to_html(index=False) if len(prev_picks_h) else "<p>(先月なし)</p>"
 
-    # screen_all（FALSE含む全件、折りたたみ）
     screen_all_table = screen_all.to_html(index=False) if len(screen_all) else "<p>(screen_all.csv がありません)</p>"
 
     css = """
@@ -195,6 +175,7 @@ th{background:#f6f6f6;}
 .small{font-size:12px; color:#666;}
 .grid2{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
 details > summary{cursor:pointer; padding:6px 0;}
+footer{margin-top:18px; color:#777; font-size:12px;}
 """
 
     html = """<!doctype html>
@@ -274,6 +255,7 @@ details > summary{cursor:pointer; padding:6px 0;}
   </details>
 </div>
 
+<footer>DASHBOARD_VERSION: {ver}</footer>
 </body>
 </html>
 """.format(
@@ -294,6 +276,7 @@ details > summary{cursor:pointer; padding:6px 0;}
         hist_orders=hist_orders,
         hist_screen=hist_screen,
         screen_all_table=screen_all_table,
+        ver=DASHBOARD_VERSION,
     )
     return html
 
@@ -319,7 +302,7 @@ def main():
     if screen_all_path.exists():
         screen_all = pd.read_csv(screen_all_path)
 
-    # docsに最新ファイルコピー
+    # docsに最新コピー
     safe_copy(ranking_path, DOCS_DIR / "ranking.csv")
     safe_copy(picks_path, DOCS_DIR / "picks.csv")
     safe_copy(meta_path, DOCS_DIR / "meta.csv")
@@ -327,7 +310,6 @@ def main():
     if orders_path.exists():
         safe_copy(orders_path, DOCS_DIR / "orders.csv")
     else:
-        # 空のorders.csvだけ作る（リンク切れ防止）
         (DOCS_DIR / "orders.csv").write_text("Ticker,action,side,qty,ref_price,note\n", encoding="utf-8")
 
     if screen_all_path.exists():
@@ -338,12 +320,16 @@ def main():
     if status_path.exists():
         safe_copy(status_path, DOCS_DIR / "status.json")
 
-    # 履歴をdocs/historyへコピー（直近12回）
+    # 履歴コピー
     copy_history_to_docs()
 
     # HTML生成
     html = build_html(meta, picks, ranking, orders, screen_all)
     (DOCS_DIR / "index.html").write_text(html, encoding="utf-8")
+
+    # どの版が動いたかログに残す（Actionsのログで確認できる）
+    print("make_dashboard.py:", DASHBOARD_VERSION)
+    print("wrote:", DOCS_DIR / "index.html")
 
 
 if __name__ == "__main__":
