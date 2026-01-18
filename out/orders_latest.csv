@@ -1,0 +1,4 @@
+﻿Ticker,action,side,qty,ref_price,note
+1308.T,ADD,BUY,94,3539.0,Target ~333000 (native) => qty=94
+1597.T,ADD,BUY,160,2076.0,Target ~333000 (native) => qty=160
+2558.T,ADD,BUY,10,30950.0,Target ~333000 (native) => qty=10

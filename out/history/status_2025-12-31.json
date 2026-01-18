@@ -1,0 +1,23 @@
+{
+  "asof_month_end": "2025-12-31",
+  "generated_at_utc": "2026-01-18 09:51:55",
+  "top_n": 3,
+  "ma_months": 10,
+  "mom_months": 12,
+  "corr_threshold": 0.95,
+  "liq_threshold_jpy": 50000000,
+  "liq_threshold_usd": 1000000,
+  "universe_count": 8,
+  "final_universe": [
+    "1308.T",
+    "1597.T",
+    "2558.T",
+    "1482.T",
+    "2621.T"
+  ],
+  "picks": [
+    "1597.T",
+    "1308.T",
+    "2558.T"
+  ]
+}
