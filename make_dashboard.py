@@ -4,8 +4,9 @@ from pathlib import Path
 from datetime import datetime, timezone
 import re
 import pandas as pd
+import html as html_escape
 
-DASHBOARD_VERSION = "v2-2026-01-18"
+DASHBOARD_VERSION = "v3-2026-01-18-no-style"
 
 OUT_DIR = Path("out")
 DOCS_DIR = Path("docs")
@@ -35,10 +36,7 @@ def latest_history_files(pattern: str, k: int = 12) -> list[Path]:
 
 
 def copy_history_to_docs():
-    """
-    docs/history に直近12回ぶんをコピー
-    """
-    patterns = ["picks_*.csv", "orders_*.csv", "screen_all_*.csv", "meta_*.csv"]
+    patterns = ["picks_*.csv", "orders_*.csv", "screen_all_*.csv", "meta_*.csv", "asof_*.txt"]
     for pat in patterns:
         for f in latest_history_files(pat, k=12):
             safe_copy(f, HIST_DST / f.name)
@@ -48,9 +46,7 @@ def build_history_links(prefix: str, title: str) -> str:
     files = sorted(HIST_DST.glob(f"{prefix}_*.csv"), reverse=True)
     if not files:
         return f"<p>({title}: 履歴なし)</p>"
-    items = []
-    for f in files:
-        items.append(f'<li><a href="history/{f.name}">{f.name}</a></li>')
+    items = [f'<li><a href="history/{f.name}">{f.name}</a></li>' for f in files]
     return "<div><div class='small'><b>{}</b></div><ul>{}</ul></div>".format(title, "".join(items))
 
 
@@ -60,21 +56,18 @@ def extract_date_from_name(stem: str, prefix: str) -> str:
 
 
 def load_latest_and_prev_from_history(prefix: str) -> tuple[pd.DataFrame, pd.DataFrame, str, str]:
-    """
-    out/history/{prefix}_YYYY-MM-DD.csv から 最新と1つ前を読む
-    """
     if not HIST_SRC.exists():
         return pd.DataFrame(), pd.DataFrame(), "(none)", "(none)"
 
     files = sorted(HIST_SRC.glob(f"{prefix}_*.csv"))
-    dated = []
+    dated: list[tuple[str, Path]] = []
     for f in files:
         d = extract_date_from_name(f.stem, prefix)
         if d:
             dated.append((d, f))
     dated.sort(key=lambda x: x[0])
 
-    if len(dated) == 0:
+    if not dated:
         return pd.DataFrame(), pd.DataFrame(), "(none)", "(none)"
 
     cur_asof, cur_file = dated[-1]
@@ -103,13 +96,9 @@ def diff_picks(cur: pd.DataFrame, prev: pd.DataFrame) -> pd.DataFrame:
     add = sorted(cur_set - prev_set)
     drop = sorted(prev_set - cur_set)
 
-    rows = []
-    for t in keep:
-        rows.append({"Ticker": t, "action": "KEEP"})
-    for t in add:
-        rows.append({"Ticker": t, "action": "ADD"})
-    for t in drop:
-        rows.append({"Ticker": t, "action": "DROP"})
+    rows = [{"Ticker": t, "action": "KEEP"} for t in keep] + \
+           [{"Ticker": t, "action": "ADD"} for t in add] + \
+           [{"Ticker": t, "action": "DROP"} for t in drop]
 
     out = pd.DataFrame(rows)
     order = {"KEEP": 0, "ADD": 1, "DROP": 2}
@@ -119,21 +108,27 @@ def diff_picks(cur: pd.DataFrame, prev: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def highlight_action_table(df: pd.DataFrame) -> str:
+def df_to_html_table_with_action_class(df: pd.DataFrame) -> str:
+    """
+    jinja2不要。action列がある場合は行に class を付与してCSSで色付け。
+    """
     if df is None or df.empty:
-        return "<p>(比較対象が不足しています)</p>"
+        return "<p>(なし)</p>"
 
-    def style_row(row):
-        a = row.get("action", "")
-        if a == "ADD":
-            return ["background-color: #eaffea"] * len(row)
-        if a == "DROP":
-            return ["background-color: #ffecec"] * len(row)
-        if a == "KEEP":
-            return ["background-color: #f7f7f7"] * len(row)
-        return [""] * len(row)
+    cols = list(df.columns)
+    thead = "<thead><tr>" + "".join(f"<th>{html_escape.escape(str(c))}</th>" for c in cols) + "</tr></thead>"
 
-    return df.style.apply(style_row, axis=1).hide(axis="index").to_html()
+    body_rows = []
+    for _, r in df.iterrows():
+        action = str(r.get("action", "")).upper()
+        cls = ""
+        if action in ("ADD", "DROP", "KEEP"):
+            cls = f' class="row-{action.lower()}"'
+        tds = "".join(f"<td>{html_escape.escape(str(r.get(c, '')))}</td>" for c in cols)
+        body_rows.append(f"<tr{cls}>{tds}</tr>")
+
+    tbody = "<tbody>" + "".join(body_rows) + "</tbody>"
+    return f"<table>{thead}{tbody}</table>"
 
 
 def build_html(meta: pd.DataFrame, picks: pd.DataFrame, ranking: pd.DataFrame,
@@ -142,17 +137,14 @@ def build_html(meta: pd.DataFrame, picks: pd.DataFrame, ranking: pd.DataFrame,
     gen = meta.loc[0, "generated_at_utc"] if len(meta) else ""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
-    # 履歴リンク
     hist_picks = build_history_links("picks", "Picks（直近12回）")
     hist_orders = build_history_links("orders", "Orders（直近12回）")
     hist_screen = build_history_links("screen_all", "Screen All（直近12回）")
 
-    # 今月/先月 picks（historyから）
     cur_picks_h, prev_picks_h, cur_asof, prev_asof = load_latest_and_prev_from_history("picks")
     diff = diff_picks(cur_picks_h, prev_picks_h)
-    diff_html = highlight_action_table(diff)
+    diff_html = df_to_html_table_with_action_class(diff)
 
-    # 表
     picks_table = picks.to_html(index=False) if len(picks) else "<p>(picks.csv がありません)</p>"
     ranking_table = ranking.to_html(index=False) if len(ranking) else "<p>(ranking.csv がありません)</p>"
     meta_table = meta.to_html(index=False) if len(meta) else "<p>(meta.csv がありません)</p>"
@@ -176,6 +168,10 @@ th{background:#f6f6f6;}
 .grid2{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
 details > summary{cursor:pointer; padding:6px 0;}
 footer{margin-top:18px; color:#777; font-size:12px;}
+/* diff table row highlights */
+.row-add{background:#eaffea;}
+.row-drop{background:#ffecec;}
+.row-keep{background:#f7f7f7;}
 """
 
     html = """<!doctype html>
@@ -269,12 +265,12 @@ footer{margin-top:18px; color:#777; font-size:12px;}
         orders_table=orders_table,
         picks_table=picks_table,
         ranking_table=ranking_table,
-        meta_table=meta_table,
         cur_html=cur_html,
         prev_html=prev_html,
         hist_picks=hist_picks,
         hist_orders=hist_orders,
         hist_screen=hist_screen,
+        meta_table=meta_table,
         screen_all_table=screen_all_table,
         ver=DASHBOARD_VERSION,
     )
@@ -294,13 +290,8 @@ def main():
     picks = read_csv(picks_path)
     meta = read_csv(meta_path)
 
-    orders = pd.DataFrame()
-    if orders_path.exists():
-        orders = pd.read_csv(orders_path)
-
-    screen_all = pd.DataFrame()
-    if screen_all_path.exists():
-        screen_all = pd.read_csv(screen_all_path)
+    orders = pd.read_csv(orders_path) if orders_path.exists() else pd.DataFrame()
+    screen_all = pd.read_csv(screen_all_path) if screen_all_path.exists() else pd.DataFrame()
 
     # docsに最新コピー
     safe_copy(ranking_path, DOCS_DIR / "ranking.csv")
@@ -327,7 +318,6 @@ def main():
     html = build_html(meta, picks, ranking, orders, screen_all)
     (DOCS_DIR / "index.html").write_text(html, encoding="utf-8")
 
-    # どの版が動いたかログに残す（Actionsのログで確認できる）
     print("make_dashboard.py:", DASHBOARD_VERSION)
     print("wrote:", DOCS_DIR / "index.html")
 
