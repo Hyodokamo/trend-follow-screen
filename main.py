@@ -25,7 +25,6 @@ HIST_DIR = OUT_DIR / "history"
 OUT_DIR.mkdir(exist_ok=True)
 HIST_DIR.mkdir(exist_ok=True)
 
-
 # =====================================================
 def load_universe(path: str) -> list[str]:
     df = pd.read_csv(path)
@@ -148,6 +147,12 @@ def main():
 
     latest = close_m.index[-1]
     asof = latest.strftime("%Y-%m-%d")
+    
+    asof_latest_txt = OUT_DIR / "asof_latest.txt"
+    asof_hist_txt = HIST_DIR / f"asof_{asof}.txt"
+    
+    asof_latest_txt.write_text(asof + "\n", encoding="utf-8")
+    asof_hist_txt.write_text(asof + "\n", encoding="utf-8")
 
     table = pd.DataFrame({
         "close": close_m.loc[latest],
