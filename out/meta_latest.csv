@@ -1,2 +1,2 @@
 ﻿asof_month_end,generated_at_utc,top_n,ma_months,mom_months,corr_threshold,liq_threshold_jpy,liq_threshold_usd,universe_count,final_universe_count
-2025-12-31,2026-01-18 09:51:55,3,10,12,0.95,50000000,1000000,8,5
+2026-01-31,2026-02-01 03:36:03,3,10,12,0.95,50000000,1000000,8,6

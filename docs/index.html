@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Trend Follow Screen - 2025-12-31</title>
+<title>Trend Follow Screen - 2026-01-31</title>
 <style>
 body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; margin:24px;}
 h1,h2{margin:0.2em 0;}
@@ -13,21 +13,174 @@ table{border-collapse:collapse; width:100%; font-size:14px;}
 th,td{border:1px solid #ddd; padding:6px; text-align:left;}
 th{background:#f6f6f6;}
 .small{font-size:12px; color:#666;}
+.grid2{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
+details > summary{cursor:pointer; padding:6px 0;}
+footer{margin-top:18px; color:#777; font-size:12px;}
+/* diff table row highlights */
+.row-add{background:#eaffea;}
+.row-drop{background:#ffecec;}
+.row-keep{background:#f7f7f7;}
 </style>
 </head>
 <body>
 <h1>Trend Follow Screen</h1>
 
 <div class="meta">
-  <div>ASOF（月末）: <b>2025-12-31</b></div>
-  <div>生成時刻（UTC）: 2026-01-18 09:51:55 / 表示更新: 2026-01-18 09:51:55</div>
+  <div>ASOF（月末）: <b>2026-01-31</b></div>
+  <div>生成時刻（UTC）: 2026-02-01 03:36:03 / 表示更新: 2026-02-01 03:36:04</div>
   <div class="small">注意：これは売買の自動執行ではなく「月次ルールのスクリーニング結果の可視化」です。</div>
 </div>
 
 <div class="box">
-  <h2>今月のPick</h2>
+  <h2>先月→今月の変更（KEEP/ADD/DROP）</h2>
+  <div class="small">先月: 2025-12-31 / 今月: 2026-01-31</div>
+  <table><thead><tr><th>Ticker</th><th>action</th></tr></thead><tbody><tr class="row-keep"><td>1308.T</td><td>KEEP</td></tr><tr class="row-keep"><td>1597.T</td><td>KEEP</td></tr><tr class="row-keep"><td>2558.T</td><td>KEEP</td></tr></tbody></table>
+</div>
+
+<div class="box">
+  <h2>今月の注文（ADD/DROPのみ）</h2>
+  <p class="small"><a href="orders.csv">orders.csv</a></p>
+  <p>(注文なし＝先月から変更なし)</p>
+</div>
+
+<div class="box">
+  <h2>今月のPick（latest）</h2>
   <p class="small"><a href="picks.csv">picks.csv</a></p>
   <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Ticker</th>
+      <th>close</th>
+      <th>ma10</th>
+      <th>mom12</th>
+      <th>trend_ok</th>
+      <th>score</th>
+      <th>avg_traded_value_60d_native</th>
+      <th>liq_ok</th>
+      <th>dup_drop</th>
+      <th>in_final</th>
+      <th>rank</th>
+      <th>pick</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1308.T</td>
+      <td>3706.0</td>
+      <td>3214.210718</td>
+      <td>0.311065</td>
+      <td>True</td>
+      <td>0.311065</td>
+      <td>1.149650e+09</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>1.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>1597.T</td>
+      <td>2052.0</td>
+      <td>1926.129321</td>
+      <td>0.221707</td>
+      <td>True</td>
+      <td>0.221707</td>
+      <td>3.125330e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>2.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>2558.T</td>
+      <td>30610.0</td>
+      <td>27792.103320</td>
+      <td>0.142470</td>
+      <td>True</td>
+      <td>0.142470</td>
+      <td>8.058405e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>3.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <h2>今月 vs 先月のPick（並べて確認）</h2>
+  <div class="grid2">
+    <div>
+      <h3 style="margin-top:0;">今月（2026-01-31）</h3>
+      <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Ticker</th>
+      <th>close</th>
+      <th>ma10</th>
+      <th>mom12</th>
+      <th>trend_ok</th>
+      <th>score</th>
+      <th>avg_traded_value_60d_native</th>
+      <th>liq_ok</th>
+      <th>dup_drop</th>
+      <th>in_final</th>
+      <th>rank</th>
+      <th>pick</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1308.T</td>
+      <td>3706.0</td>
+      <td>3214.210718</td>
+      <td>0.311065</td>
+      <td>True</td>
+      <td>0.311065</td>
+      <td>1.149650e+09</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>1.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>1597.T</td>
+      <td>2052.0</td>
+      <td>1926.129321</td>
+      <td>0.221707</td>
+      <td>True</td>
+      <td>0.221707</td>
+      <td>3.125330e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>2.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>2558.T</td>
+      <td>30610.0</td>
+      <td>27792.103320</td>
+      <td>0.142470</td>
+      <td>True</td>
+      <td>0.142470</td>
+      <td>8.058405e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>3.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <div>
+      <h3 style="margin-top:0;">先月（2025-12-31）</h3>
+      <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th>Ticker</th>
@@ -89,6 +242,8 @@ th{background:#f6f6f6;}
     </tr>
   </tbody>
 </table>
+    </div>
+  </div>
 </div>
 
 <div class="box">
@@ -113,13 +268,13 @@ th{background:#f6f6f6;}
   </thead>
   <tbody>
     <tr>
-      <td>1597.T</td>
-      <td>2076.000000</td>
-      <td>1889.553638</td>
-      <td>0.271011</td>
+      <td>1308.T</td>
+      <td>3706.000000</td>
+      <td>3214.210718</td>
+      <td>0.311065</td>
       <td>True</td>
-      <td>0.271011</td>
-      <td>2.656522e+08</td>
+      <td>0.311065</td>
+      <td>1.149650e+09</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -127,13 +282,13 @@ th{background:#f6f6f6;}
       <td>True</td>
     </tr>
     <tr>
-      <td>1308.T</td>
-      <td>3539.000000</td>
-      <td>3115.450928</td>
-      <td>0.256758</td>
+      <td>1597.T</td>
+      <td>2052.000000</td>
+      <td>1926.129321</td>
+      <td>0.221707</td>
       <td>True</td>
-      <td>0.256758</td>
-      <td>9.899275e+08</td>
+      <td>0.221707</td>
+      <td>3.125330e+08</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -142,12 +297,12 @@ th{background:#f6f6f6;}
     </tr>
     <tr>
       <td>2558.T</td>
-      <td>30950.000000</td>
-      <td>27082.653516</td>
-      <td>0.153881</td>
+      <td>30610.000000</td>
+      <td>27792.103320</td>
+      <td>0.142470</td>
       <td>True</td>
-      <td>0.153881</td>
-      <td>7.594972e+08</td>
+      <td>0.142470</td>
+      <td>8.058405e+08</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -155,13 +310,13 @@ th{background:#f6f6f6;}
       <td>True</td>
     </tr>
     <tr>
-      <td>1482.T</td>
-      <td>1629.753174</td>
-      <td>1615.583582</td>
-      <td>0.044631</td>
+      <td>2620.T</td>
+      <td>358.200012</td>
+      <td>343.038055</td>
+      <td>0.042378</td>
       <td>True</td>
-      <td>0.044631</td>
-      <td>1.693214e+08</td>
+      <td>0.042378</td>
+      <td>5.582739e+07</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -169,17 +324,31 @@ th{background:#f6f6f6;}
       <td>False</td>
     </tr>
     <tr>
-      <td>2621.T</td>
-      <td>1081.787842</td>
-      <td>1086.029175</td>
-      <td>0.008591</td>
+      <td>1482.T</td>
+      <td>1611.000000</td>
+      <td>1615.648047</td>
+      <td>0.026759</td>
       <td>False</td>
       <td>-inf</td>
-      <td>8.609788e+08</td>
+      <td>1.546524e+08</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
       <td>5.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>2621.T</td>
+      <td>1068.000000</td>
+      <td>1081.602466</td>
+      <td>-0.009018</td>
+      <td>False</td>
+      <td>-inf</td>
+      <td>8.375522e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>6.0</td>
       <td>False</td>
     </tr>
   </tbody>
@@ -187,8 +356,10 @@ th{background:#f6f6f6;}
 </div>
 
 <div class="box">
-  <h2>過去Picks（直近12回）</h2>
-  <ul><li><a href="history/picks_2025-12-31.csv">picks_2025-12-31.csv</a></li></ul>
+  <h2>履歴</h2>
+  <div><div class='small'><b>Picks（直近12回）</b></div><ul><li><a href="history/picks_2026-01-31.csv">picks_2026-01-31.csv</a></li><li><a href="history/picks_2025-12-31.csv">picks_2025-12-31.csv</a></li></ul></div>
+  <div><div class='small'><b>Orders（直近12回）</b></div><ul><li><a href="history/orders_2026-01-31.csv">orders_2026-01-31.csv</a></li><li><a href="history/orders_2025-12-31.csv">orders_2025-12-31.csv</a></li></ul></div>
+  <div><div class='small'><b>Screen All（直近12回）</b></div><ul><li><a href="history/screen_all_2026-01-31.csv">screen_all_2026-01-31.csv</a></li><li><a href="history/screen_all_2025-12-31.csv">screen_all_2025-12-31.csv</a></li></ul></div>
 </div>
 
 <div class="box">
@@ -211,8 +382,8 @@ th{background:#f6f6f6;}
   </thead>
   <tbody>
     <tr>
-      <td>2025-12-31</td>
-      <td>2026-01-18 09:51:55</td>
+      <td>2026-01-31</td>
+      <td>2026-02-01 03:36:03</td>
       <td>3</td>
       <td>10</td>
       <td>12</td>
@@ -220,11 +391,179 @@ th{background:#f6f6f6;}
       <td>50000000</td>
       <td>1000000</td>
       <td>8</td>
-      <td>5</td>
+      <td>6</td>
     </tr>
   </tbody>
 </table>
 </div>
 
+<div class="box">
+  <h2>スクリーニング全結果（参考：FALSE含む）</h2>
+  <p class="small"><a href="screen_all.csv">screen_all.csv</a></p>
+  <details>
+    <summary>表示する（落選理由も含む）</summary>
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Ticker</th>
+      <th>close</th>
+      <th>ma10</th>
+      <th>mom12</th>
+      <th>trend_ok</th>
+      <th>score</th>
+      <th>avg_traded_value_60d_native</th>
+      <th>liq_ok</th>
+      <th>dup_drop</th>
+      <th>in_final</th>
+      <th>rank</th>
+      <th>pick</th>
+      <th>fail_liq</th>
+      <th>fail_dup</th>
+      <th>fail_trend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1308.T</td>
+      <td>3706.000000</td>
+      <td>3214.210718</td>
+      <td>0.311065</td>
+      <td>True</td>
+      <td>0.311065</td>
+      <td>1.149650e+09</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>1597.T</td>
+      <td>2052.000000</td>
+      <td>1926.129321</td>
+      <td>0.221707</td>
+      <td>True</td>
+      <td>0.221707</td>
+      <td>3.125330e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>2.0</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>2558.T</td>
+      <td>30610.000000</td>
+      <td>27792.103320</td>
+      <td>0.142470</td>
+      <td>True</td>
+      <td>0.142470</td>
+      <td>8.058405e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>3.0</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>1482.T</td>
+      <td>1611.000000</td>
+      <td>1615.648047</td>
+      <td>0.026759</td>
+      <td>False</td>
+      <td>-inf</td>
+      <td>1.546524e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>5.0</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>2621.T</td>
+      <td>1068.000000</td>
+      <td>1081.602466</td>
+      <td>-0.009018</td>
+      <td>False</td>
+      <td>-inf</td>
+      <td>8.375522e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>6.0</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>1326.T</td>
+      <td>73120.000000</td>
+      <td>52779.000000</td>
+      <td>0.831663</td>
+      <td>True</td>
+      <td>0.831663</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>1658.T</td>
+      <td>3890.000000</td>
+      <td>3223.528394</td>
+      <td>0.405704</td>
+      <td>True</td>
+      <td>0.405704</td>
+      <td>2.741883e+07</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>2620.T</td>
+      <td>358.200012</td>
+      <td>343.038055</td>
+      <td>0.042378</td>
+      <td>True</td>
+      <td>0.042378</td>
+      <td>5.582739e+07</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>4.0</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+  </details>
+</div>
+
+<footer>DASHBOARD_VERSION: v3-2026-01-18-no-style</footer>
 </body>
 </html>
