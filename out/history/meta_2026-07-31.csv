@@ -1,0 +1,2 @@
+﻿asof_month_end,generated_at_utc,top_n,ma_months,mom_months,corr_threshold,liq_threshold_jpy,liq_threshold_usd,universe_count,final_universe_count
+2026-07-31,2026-08-01 03:58:23,3,10,12,0.95,50000000,1000000,8,7
