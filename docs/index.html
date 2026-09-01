@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Trend Follow Screen - 2026-07-31</title>
+<title>Trend Follow Screen - 2026-08-31</title>
 <style>
 body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; margin:24px;}
 h1,h2{margin:0.2em 0;}
@@ -26,50 +26,21 @@ footer{margin-top:18px; color:#777; font-size:12px;}
 <h1>Trend Follow Screen</h1>
 
 <div class="meta">
-  <div>ASOF（月末）: <b>2026-07-31</b></div>
-  <div>生成時刻（UTC）: 2026-08-01 03:58:23 / 表示更新: 2026-08-01 03:58:23</div>
+  <div>ASOF（月末）: <b>2026-08-31</b></div>
+  <div>生成時刻（UTC）: 2026-09-01 05:23:38 / 表示更新: 2026-09-01 05:23:38</div>
   <div class="small">注意：これは売買の自動執行ではなく「月次ルールのスクリーニング結果の可視化」です。</div>
 </div>
 
 <div class="box">
   <h2>先月→今月の変更（KEEP/ADD/DROP）</h2>
-  <div class="small">先月: 2026-06-30 / 今月: 2026-07-31</div>
-  <table><thead><tr><th>Ticker</th><th>action</th></tr></thead><tbody><tr class="row-keep"><td>1308.T</td><td>KEEP</td></tr><tr class="row-keep"><td>2620.T</td><td>KEEP</td></tr><tr class="row-add"><td>1658.T</td><td>ADD</td></tr><tr class="row-drop"><td>1326.T</td><td>DROP</td></tr></tbody></table>
+  <div class="small">先月: 2026-07-31 / 今月: 2026-08-31</div>
+  <table><thead><tr><th>Ticker</th><th>action</th></tr></thead><tbody><tr class="row-keep"><td>1308.T</td><td>KEEP</td></tr><tr class="row-keep"><td>1658.T</td><td>KEEP</td></tr><tr class="row-keep"><td>2620.T</td><td>KEEP</td></tr></tbody></table>
 </div>
 
 <div class="box">
   <h2>今月の注文（ADD/DROPのみ）</h2>
   <p class="small"><a href="orders.csv">orders.csv</a></p>
-  <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>Ticker</th>
-      <th>action</th>
-      <th>side</th>
-      <th>qty</th>
-      <th>ref_price</th>
-      <th>note</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1326.T</td>
-      <td>DROP</td>
-      <td>SELL</td>
-      <td>ALL</td>
-      <td>60480.0</td>
-      <td>Sell all (manual: use your current holdings qty)</td>
-    </tr>
-    <tr>
-      <td>1658.T</td>
-      <td>ADD</td>
-      <td>BUY</td>
-      <td>77</td>
-      <td>4320.0</td>
-      <td>Target ~333000 (native) =&gt; qty=77</td>
-    </tr>
-  </tbody>
-</table>
+  <p>(注文なし＝先月から変更なし)</p>
 </div>
 
 <div class="box">
@@ -95,12 +66,12 @@ footer{margin-top:18px; color:#777; font-size:12px;}
   <tbody>
     <tr>
       <td>1658.T</td>
-      <td>4320.000000</td>
-      <td>3960.658521</td>
-      <td>0.427942</td>
+      <td>4425.0</td>
+      <td>4028.829443</td>
+      <td>0.467163</td>
       <td>True</td>
-      <td>0.427942</td>
-      <td>6.025957e+07</td>
+      <td>0.467163</td>
+      <td>5.033766e+07</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -109,12 +80,12 @@ footer{margin-top:18px; color:#777; font-size:12px;}
     </tr>
     <tr>
       <td>1308.T</td>
-      <td>4120.000000</td>
-      <td>3762.111646</td>
-      <td>0.390365</td>
+      <td>4271.0</td>
+      <td>3850.610449</td>
+      <td>0.380544</td>
       <td>True</td>
-      <td>0.390365</td>
-      <td>1.552138e+09</td>
+      <td>0.380544</td>
+      <td>1.332920e+09</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -123,12 +94,12 @@ footer{margin-top:18px; color:#777; font-size:12px;}
     </tr>
     <tr>
       <td>2620.T</td>
-      <td>371.200012</td>
-      <td>363.001947</td>
-      <td>0.111638</td>
+      <td>371.0</td>
+      <td>365.022882</td>
+      <td>0.115915</td>
       <td>True</td>
-      <td>0.111638</td>
-      <td>8.272977e+07</td>
+      <td>0.115915</td>
+      <td>7.893018e+07</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -143,7 +114,72 @@ footer{margin-top:18px; color:#777; font-size:12px;}
   <h2>今月 vs 先月のPick（並べて確認）</h2>
   <div class="grid2">
     <div>
-      <h3 style="margin-top:0;">今月（2026-07-31）</h3>
+      <h3 style="margin-top:0;">今月（2026-08-31）</h3>
+      <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Ticker</th>
+      <th>close</th>
+      <th>ma10</th>
+      <th>mom12</th>
+      <th>trend_ok</th>
+      <th>score</th>
+      <th>avg_traded_value_60d_native</th>
+      <th>liq_ok</th>
+      <th>dup_drop</th>
+      <th>in_final</th>
+      <th>rank</th>
+      <th>pick</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1658.T</td>
+      <td>4425.0</td>
+      <td>4028.829443</td>
+      <td>0.467163</td>
+      <td>True</td>
+      <td>0.467163</td>
+      <td>5.033766e+07</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>1.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>1308.T</td>
+      <td>4271.0</td>
+      <td>3850.610449</td>
+      <td>0.380544</td>
+      <td>True</td>
+      <td>0.380544</td>
+      <td>1.332920e+09</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>2.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>2620.T</td>
+      <td>371.0</td>
+      <td>365.022882</td>
+      <td>0.115915</td>
+      <td>True</td>
+      <td>0.115915</td>
+      <td>7.893018e+07</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>3.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <div>
+      <h3 style="margin-top:0;">先月（2026-07-31）</h3>
       <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -198,71 +234,6 @@ footer{margin-top:18px; color:#777; font-size:12px;}
       <td>True</td>
       <td>0.111638</td>
       <td>8.272977e+07</td>
-      <td>True</td>
-      <td>False</td>
-      <td>True</td>
-      <td>3.0</td>
-      <td>True</td>
-    </tr>
-  </tbody>
-</table>
-    </div>
-    <div>
-      <h3 style="margin-top:0;">先月（2026-06-30）</h3>
-      <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>Ticker</th>
-      <th>close</th>
-      <th>ma10</th>
-      <th>mom12</th>
-      <th>trend_ok</th>
-      <th>score</th>
-      <th>avg_traded_value_60d_native</th>
-      <th>liq_ok</th>
-      <th>dup_drop</th>
-      <th>in_final</th>
-      <th>rank</th>
-      <th>pick</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1308.T</td>
-      <td>4179.000000</td>
-      <td>3740.4000</td>
-      <td>0.430500</td>
-      <td>True</td>
-      <td>0.430500</td>
-      <td>1.316307e+09</td>
-      <td>True</td>
-      <td>False</td>
-      <td>True</td>
-      <td>1.0</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <td>2620.T</td>
-      <td>377.600006</td>
-      <td>362.0564</td>
-      <td>0.161092</td>
-      <td>True</td>
-      <td>0.161092</td>
-      <td>8.850426e+07</td>
-      <td>True</td>
-      <td>False</td>
-      <td>True</td>
-      <td>2.0</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <td>1326.T</td>
-      <td>59690.000000</td>
-      <td>63992.0000</td>
-      <td>0.367782</td>
-      <td>False</td>
-      <td>-inf</td>
-      <td>9.023518e+08</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -298,12 +269,12 @@ footer{margin-top:18px; color:#777; font-size:12px;}
   <tbody>
     <tr>
       <td>1658.T</td>
-      <td>4320.000000</td>
-      <td>3960.658521</td>
-      <td>0.427942</td>
+      <td>4425.0</td>
+      <td>4028.829443</td>
+      <td>0.467163</td>
       <td>True</td>
-      <td>0.427942</td>
-      <td>6.025957e+07</td>
+      <td>0.467163</td>
+      <td>5.033766e+07</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -312,12 +283,12 @@ footer{margin-top:18px; color:#777; font-size:12px;}
     </tr>
     <tr>
       <td>1308.T</td>
-      <td>4120.000000</td>
-      <td>3762.111646</td>
-      <td>0.390365</td>
+      <td>4271.0</td>
+      <td>3850.610449</td>
+      <td>0.380544</td>
       <td>True</td>
-      <td>0.390365</td>
-      <td>1.552138e+09</td>
+      <td>0.380544</td>
+      <td>1.332920e+09</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -326,12 +297,12 @@ footer{margin-top:18px; color:#777; font-size:12px;}
     </tr>
     <tr>
       <td>2620.T</td>
-      <td>371.200012</td>
-      <td>363.001947</td>
-      <td>0.111638</td>
+      <td>371.0</td>
+      <td>365.022882</td>
+      <td>0.115915</td>
       <td>True</td>
-      <td>0.111638</td>
-      <td>8.272977e+07</td>
+      <td>0.115915</td>
+      <td>7.893018e+07</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -339,13 +310,13 @@ footer{margin-top:18px; color:#777; font-size:12px;}
       <td>True</td>
     </tr>
     <tr>
-      <td>1597.T</td>
-      <td>1942.000000</td>
-      <td>1955.603467</td>
-      <td>0.059683</td>
+      <td>1326.T</td>
+      <td>65020.0</td>
+      <td>65538.000000</td>
+      <td>0.407664</td>
       <td>False</td>
       <td>-inf</td>
-      <td>2.997747e+08</td>
+      <td>6.800029e+08</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -353,13 +324,13 @@ footer{margin-top:18px; color:#777; font-size:12px;}
       <td>False</td>
     </tr>
     <tr>
-      <td>1482.T</td>
-      <td>1542.000000</td>
-      <td>1577.549304</td>
-      <td>-0.012122</td>
+      <td>1597.T</td>
+      <td>1862.0</td>
+      <td>1944.750269</td>
+      <td>-0.025150</td>
       <td>False</td>
       <td>-inf</td>
-      <td>1.136724e+08</td>
+      <td>3.245431e+08</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -367,13 +338,13 @@ footer{margin-top:18px; color:#777; font-size:12px;}
       <td>False</td>
     </tr>
     <tr>
-      <td>2621.T</td>
-      <td>1002.000000</td>
-      <td>1051.581287</td>
-      <td>-0.038136</td>
+      <td>1482.T</td>
+      <td>1537.0</td>
+      <td>1572.264404</td>
+      <td>-0.029035</td>
       <td>False</td>
       <td>-inf</td>
-      <td>4.877640e+08</td>
+      <td>1.240927e+08</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -381,17 +352,31 @@ footer{margin-top:18px; color:#777; font-size:12px;}
       <td>False</td>
     </tr>
     <tr>
-      <td>2558.T</td>
-      <td>3451.000000</td>
-      <td>25648.519531</td>
-      <td>-0.873636</td>
+      <td>2621.T</td>
+      <td>1004.0</td>
+      <td>1043.672839</td>
+      <td>-0.034444</td>
       <td>False</td>
       <td>-inf</td>
-      <td>6.820188e+08</td>
+      <td>3.496740e+08</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
       <td>7.0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <td>2558.T</td>
+      <td>3537.0</td>
+      <td>22969.209180</td>
+      <td>-0.870487</td>
+      <td>False</td>
+      <td>-inf</td>
+      <td>5.937572e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>8.0</td>
       <td>False</td>
     </tr>
   </tbody>
@@ -400,9 +385,9 @@ footer{margin-top:18px; color:#777; font-size:12px;}
 
 <div class="box">
   <h2>履歴</h2>
-  <div><div class='small'><b>Picks（直近12回）</b></div><ul><li><a href="history/picks_2026-07-31.csv">picks_2026-07-31.csv</a></li><li><a href="history/picks_2026-06-30.csv">picks_2026-06-30.csv</a></li><li><a href="history/picks_2026-05-31.csv">picks_2026-05-31.csv</a></li><li><a href="history/picks_2026-04-30.csv">picks_2026-04-30.csv</a></li><li><a href="history/picks_2026-03-31.csv">picks_2026-03-31.csv</a></li><li><a href="history/picks_2026-02-28.csv">picks_2026-02-28.csv</a></li><li><a href="history/picks_2026-01-31.csv">picks_2026-01-31.csv</a></li><li><a href="history/picks_2025-12-31.csv">picks_2025-12-31.csv</a></li></ul></div>
-  <div><div class='small'><b>Orders（直近12回）</b></div><ul><li><a href="history/orders_2026-07-31.csv">orders_2026-07-31.csv</a></li><li><a href="history/orders_2026-06-30.csv">orders_2026-06-30.csv</a></li><li><a href="history/orders_2026-05-31.csv">orders_2026-05-31.csv</a></li><li><a href="history/orders_2026-04-30.csv">orders_2026-04-30.csv</a></li><li><a href="history/orders_2026-03-31.csv">orders_2026-03-31.csv</a></li><li><a href="history/orders_2026-02-28.csv">orders_2026-02-28.csv</a></li><li><a href="history/orders_2026-01-31.csv">orders_2026-01-31.csv</a></li><li><a href="history/orders_2025-12-31.csv">orders_2025-12-31.csv</a></li></ul></div>
-  <div><div class='small'><b>Screen All（直近12回）</b></div><ul><li><a href="history/screen_all_2026-07-31.csv">screen_all_2026-07-31.csv</a></li><li><a href="history/screen_all_2026-06-30.csv">screen_all_2026-06-30.csv</a></li><li><a href="history/screen_all_2026-05-31.csv">screen_all_2026-05-31.csv</a></li><li><a href="history/screen_all_2026-04-30.csv">screen_all_2026-04-30.csv</a></li><li><a href="history/screen_all_2026-03-31.csv">screen_all_2026-03-31.csv</a></li><li><a href="history/screen_all_2026-02-28.csv">screen_all_2026-02-28.csv</a></li><li><a href="history/screen_all_2026-01-31.csv">screen_all_2026-01-31.csv</a></li><li><a href="history/screen_all_2025-12-31.csv">screen_all_2025-12-31.csv</a></li></ul></div>
+  <div><div class='small'><b>Picks（直近12回）</b></div><ul><li><a href="history/picks_2026-08-31.csv">picks_2026-08-31.csv</a></li><li><a href="history/picks_2026-07-31.csv">picks_2026-07-31.csv</a></li><li><a href="history/picks_2026-06-30.csv">picks_2026-06-30.csv</a></li><li><a href="history/picks_2026-05-31.csv">picks_2026-05-31.csv</a></li><li><a href="history/picks_2026-04-30.csv">picks_2026-04-30.csv</a></li><li><a href="history/picks_2026-03-31.csv">picks_2026-03-31.csv</a></li><li><a href="history/picks_2026-02-28.csv">picks_2026-02-28.csv</a></li><li><a href="history/picks_2026-01-31.csv">picks_2026-01-31.csv</a></li><li><a href="history/picks_2025-12-31.csv">picks_2025-12-31.csv</a></li></ul></div>
+  <div><div class='small'><b>Orders（直近12回）</b></div><ul><li><a href="history/orders_2026-08-31.csv">orders_2026-08-31.csv</a></li><li><a href="history/orders_2026-07-31.csv">orders_2026-07-31.csv</a></li><li><a href="history/orders_2026-06-30.csv">orders_2026-06-30.csv</a></li><li><a href="history/orders_2026-05-31.csv">orders_2026-05-31.csv</a></li><li><a href="history/orders_2026-04-30.csv">orders_2026-04-30.csv</a></li><li><a href="history/orders_2026-03-31.csv">orders_2026-03-31.csv</a></li><li><a href="history/orders_2026-02-28.csv">orders_2026-02-28.csv</a></li><li><a href="history/orders_2026-01-31.csv">orders_2026-01-31.csv</a></li><li><a href="history/orders_2025-12-31.csv">orders_2025-12-31.csv</a></li></ul></div>
+  <div><div class='small'><b>Screen All（直近12回）</b></div><ul><li><a href="history/screen_all_2026-08-31.csv">screen_all_2026-08-31.csv</a></li><li><a href="history/screen_all_2026-07-31.csv">screen_all_2026-07-31.csv</a></li><li><a href="history/screen_all_2026-06-30.csv">screen_all_2026-06-30.csv</a></li><li><a href="history/screen_all_2026-05-31.csv">screen_all_2026-05-31.csv</a></li><li><a href="history/screen_all_2026-04-30.csv">screen_all_2026-04-30.csv</a></li><li><a href="history/screen_all_2026-03-31.csv">screen_all_2026-03-31.csv</a></li><li><a href="history/screen_all_2026-02-28.csv">screen_all_2026-02-28.csv</a></li><li><a href="history/screen_all_2026-01-31.csv">screen_all_2026-01-31.csv</a></li><li><a href="history/screen_all_2025-12-31.csv">screen_all_2025-12-31.csv</a></li></ul></div>
 </div>
 
 <div class="box">
@@ -425,8 +410,8 @@ footer{margin-top:18px; color:#777; font-size:12px;}
   </thead>
   <tbody>
     <tr>
-      <td>2026-07-31</td>
-      <td>2026-08-01 03:58:23</td>
+      <td>2026-08-31</td>
+      <td>2026-09-01 05:23:38</td>
       <td>3</td>
       <td>10</td>
       <td>12</td>
@@ -434,7 +419,7 @@ footer{margin-top:18px; color:#777; font-size:12px;}
       <td>50000000</td>
       <td>1000000</td>
       <td>8</td>
-      <td>7</td>
+      <td>8</td>
     </tr>
   </tbody>
 </table>
@@ -468,12 +453,12 @@ footer{margin-top:18px; color:#777; font-size:12px;}
   <tbody>
     <tr>
       <td>1308.T</td>
-      <td>4120.000000</td>
-      <td>3762.111646</td>
-      <td>0.390365</td>
+      <td>4271.0</td>
+      <td>3850.610449</td>
+      <td>0.380544</td>
       <td>True</td>
-      <td>0.390365</td>
-      <td>1.552138e+09</td>
+      <td>0.380544</td>
+      <td>1.332920e+09</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -485,46 +470,12 @@ footer{margin-top:18px; color:#777; font-size:12px;}
     </tr>
     <tr>
       <td>1597.T</td>
-      <td>1942.000000</td>
-      <td>1955.603467</td>
-      <td>0.059683</td>
+      <td>1862.0</td>
+      <td>1944.750269</td>
+      <td>-0.025150</td>
       <td>False</td>
       <td>-inf</td>
-      <td>2.997747e+08</td>
-      <td>True</td>
-      <td>False</td>
-      <td>True</td>
-      <td>4.0</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <td>2558.T</td>
-      <td>3451.000000</td>
-      <td>25648.519531</td>
-      <td>-0.873636</td>
-      <td>False</td>
-      <td>-inf</td>
-      <td>6.820188e+08</td>
-      <td>True</td>
-      <td>False</td>
-      <td>True</td>
-      <td>7.0</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <td>1482.T</td>
-      <td>1542.000000</td>
-      <td>1577.549304</td>
-      <td>-0.012122</td>
-      <td>False</td>
-      <td>-inf</td>
-      <td>1.136724e+08</td>
+      <td>3.245431e+08</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -535,13 +486,30 @@ footer{margin-top:18px; color:#777; font-size:12px;}
       <td>True</td>
     </tr>
     <tr>
-      <td>2621.T</td>
-      <td>1002.000000</td>
-      <td>1051.581287</td>
-      <td>-0.038136</td>
+      <td>2558.T</td>
+      <td>3537.0</td>
+      <td>22969.209180</td>
+      <td>-0.870487</td>
       <td>False</td>
       <td>-inf</td>
-      <td>4.877640e+08</td>
+      <td>5.937572e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>8.0</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>1482.T</td>
+      <td>1537.0</td>
+      <td>1572.264404</td>
+      <td>-0.029035</td>
+      <td>False</td>
+      <td>-inf</td>
+      <td>1.240927e+08</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -552,30 +520,47 @@ footer{margin-top:18px; color:#777; font-size:12px;}
       <td>True</td>
     </tr>
     <tr>
-      <td>1326.T</td>
-      <td>60480.000000</td>
-      <td>64761.000000</td>
-      <td>0.335689</td>
+      <td>2621.T</td>
+      <td>1004.0</td>
+      <td>1043.672839</td>
+      <td>-0.034444</td>
       <td>False</td>
       <td>-inf</td>
-      <td>NaN</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>3.496740e+08</td>
       <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>7.0</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <td>1326.T</td>
+      <td>65020.0</td>
+      <td>65538.000000</td>
+      <td>0.407664</td>
+      <td>False</td>
+      <td>-inf</td>
+      <td>6.800029e+08</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+      <td>4.0</td>
+      <td>False</td>
+      <td>False</td>
       <td>False</td>
       <td>True</td>
     </tr>
     <tr>
       <td>1658.T</td>
-      <td>4320.000000</td>
-      <td>3960.658521</td>
-      <td>0.427942</td>
+      <td>4425.0</td>
+      <td>4028.829443</td>
+      <td>0.467163</td>
       <td>True</td>
-      <td>0.427942</td>
-      <td>6.025957e+07</td>
+      <td>0.467163</td>
+      <td>5.033766e+07</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>
@@ -587,12 +572,12 @@ footer{margin-top:18px; color:#777; font-size:12px;}
     </tr>
     <tr>
       <td>2620.T</td>
-      <td>371.200012</td>
-      <td>363.001947</td>
-      <td>0.111638</td>
+      <td>371.0</td>
+      <td>365.022882</td>
+      <td>0.115915</td>
       <td>True</td>
-      <td>0.111638</td>
-      <td>8.272977e+07</td>
+      <td>0.115915</td>
+      <td>7.893018e+07</td>
       <td>True</td>
       <td>False</td>
       <td>True</td>

@@ -1,3 +1,1 @@
 ﻿Ticker,action,side,qty,ref_price,note
-1326.T,DROP,SELL,ALL,60480.0,Sell all (manual: use your current holdings qty)
-1658.T,ADD,BUY,77,4320.0,Target ~333000 (native) => qty=77
